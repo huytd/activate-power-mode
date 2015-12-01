@@ -15,6 +15,9 @@ module.exports = ActivatePowerMode =
     animation:
       type: 'boolean'
       default: true
+    shakePower:
+      type: 'integer'
+      default: 1
 
   activate: (state) ->
     @subscriptions = new CompositeDisposable
@@ -75,7 +78,7 @@ module.exports = ActivatePowerMode =
       @throttledShake()
 
   shake: ->
-    intensity = 1 + 2 * Math.random()
+    intensity = 1 + 2 * Math.random() * atom.config.get('activate-power-mode.shakePower')
     x = intensity * (if Math.random() > 0.5 then -1 else 1)
     y = intensity * (if Math.random() > 0.5 then -1 else 1)
 
